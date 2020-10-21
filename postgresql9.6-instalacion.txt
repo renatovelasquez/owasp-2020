@@ -1,0 +1,42 @@
+yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm -y
+
+yum install postgresql96 postgresql96-server postgresql96-contrib postgresql96-libs -y
+
+/usr/pgsql-9.6/bin/postgresql96-setup initdb
+
+systemctl enable postgresql-9.6.service
+
+systemctl start postgresql-9.6.service
+
+su – postgres
+psql
+
+
+Crear el Esquema JBTRAVEL
+---------------------------
+psql -f scripts/jbtravel.sql
+
+
+Referencia:
+https://yallalabs.com/linux/how-to-install-postgresql-9-6-on-centos-7-rhel-7/
+
+module.xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module xmlns="urn:jboss:module:1.0" name="org.postgresql">
+
+   <resources>
+
+      <resource-root path="postgresql-9.0-801.jar"/>
+
+   </resources>
+
+   <dependencies>
+
+      <module name="javax.api"/>
+
+      <module name="javax.transaction.api"/>
+
+   </dependencies>
+
+</module>
